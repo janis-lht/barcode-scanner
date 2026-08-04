@@ -2,14 +2,14 @@
   <ion-page>
     <ion-header translucent>
       <ion-toolbar>
-        <ion-title>Part A: Barcode Scan</ion-title>
+        <ion-title>Barcode Scan</ion-title>
       </ion-toolbar>
     </ion-header>
 
     <ion-content class="ion-padding" :fullscreen="true">
       <ion-label>
-        <h2>Scan & Store</h2>
-        <p>Hier werden Barcodes mit Kamera oder Galerie erfasst und in den Store aufgenommen.</p>
+        <h2>Part A: Scan &amp; Store</h2>
+        <p>Dies ist die Testseite für das Hinzufügen von Barcodes zum Store.</p>
       </ion-label>
 
       <ion-button expand="block" @click="scanWithCameraAction">
@@ -19,7 +19,7 @@
         Scan aus Galerie
       </ion-button>
 
-      <p>Aktuelle Scan-Ergebnisse im Store: {{ barcodeCount }}</p>
+      <p>Scannergebnisse im aktuellen Lauf: {{ barcodeCount }}</p>
 
       <ion-toast
         :is-open="toastOpen"
@@ -94,10 +94,3 @@ async function scanFromGalleryAction() {
   }
 }
 </script>
-
-<style scoped>
-ion-label {
-  display: block;
-  margin-bottom: 16px;
-}
-</style>
