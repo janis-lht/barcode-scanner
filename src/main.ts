@@ -1,6 +1,7 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router';
+import { barcodeStore } from './services/barcodeStore';
 
 import { IonicVue } from '@ionic/vue';
 
@@ -39,6 +40,15 @@ const app = createApp(App)
   .use(IonicVue)
   .use(router);
 
-router.isReady().then(() => {
+async function bootstrap() {
+  try {
+    await barcodeStore.loadBarcodes();
+  } catch (error) {
+    console.warn('Failed to load stored barcodes before app mount', error);
+  }
+
+  await router.isReady();
   app.mount('#app');
-});
+}
+
+void bootstrap();
