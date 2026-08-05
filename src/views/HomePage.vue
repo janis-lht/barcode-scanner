@@ -106,6 +106,7 @@ import {
   IonToast,
 } from '@ionic/vue';
 import { Clipboard } from '@capacitor/clipboard';
+import { AppLauncher } from '@capacitor/app-launcher';
 import { DefaultWebViewOptions, InAppBrowser } from '@capacitor/inappbrowser';
 import { Share } from '@capacitor/share';
 import { barcodeStore, type BarcodeEntry } from '../services/barcodeStore';
@@ -123,6 +124,18 @@ function showToast(message: string) {
 
 function formatBarcodeText(barcode: BarcodeEntry): string {
   return `${barcode.displayValue}\nFormat: ${barcode.format}\nWerttyp: ${barcode.valueType}`;
+}
+
+function getClipboardValue(barcode: BarcodeEntry): string {
+  if (barcode.valueType === 'URL') {
+    return normalizeUrl(barcode.displayValue);
+  }
+
+  if (barcode.valueType === 'PHONE') {
+    return `tel:${normalizePhone(barcode.displayValue)}`;
+  }
+
+  return barcode.displayValue;
 }
 
 function isOpenable(barcode: BarcodeEntry): boolean {
@@ -195,7 +208,7 @@ async function shareBarcode(barcode: BarcodeEntry) {
 
 async function copyBarcode(barcode: BarcodeEntry) {
   try {
-    await Clipboard.write({ string: formatBarcodeText(barcode) });
+    await Clipboard.write({ string: getClipboardValue(barcode) });
     showToast('Barcode in die Zwischenablage kopiert.');
   } catch (error) {
     console.error('copyBarcode error', error);
@@ -224,7 +237,9 @@ async function openBarcode(barcode: BarcodeEntry) {
     }
 
     if (barcode.valueType === 'PHONE') {
-      globalThis.location.href = `tel:${normalizePhone(barcode.displayValue)}`;
+      await AppLauncher.openUrl({
+        url: `tel:${normalizePhone(barcode.displayValue)}`,
+      });
       return;
     }
   } catch (error) {
@@ -271,7 +286,12 @@ async function openBarcode(barcode: BarcodeEntry) {
 .barcode-item {
   --padding-start: 0;
   --inner-padding-end: 0;
-  align-items: flex-start;
+  --min-height: unset;
+}
+
+.barcode-item::part(native) {
+  align-items: stretch;
+  flex-direction: column;
 }
 
 .barcode-label h3 {
@@ -280,16 +300,20 @@ async function openBarcode(barcode: BarcodeEntry) {
   font-weight: 700;
 }
 
+.barcode-label {
+  width: 100%;
+}
+
 .barcode-label p {
   margin: 0;
   color: var(--ion-color-medium-shade);
 }
 
 .barcode-actions {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-  gap: 4px;
-  margin-left: 12px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(96px, 1fr));
+  gap: 8px;
+  width: 100%;
+  margin-top: 12px;
 }
 </style>
