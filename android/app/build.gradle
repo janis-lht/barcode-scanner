@@ -44,6 +44,18 @@ dependencies {
 
 apply from: 'capacitor.build.gradle'
 
+def invalidConfigCopy = file('src/main/res/xml/config 2.xml')
+tasks.configureEach { task ->
+    if (task.name == 'preBuild') {
+        task.doFirst {
+            if (invalidConfigCopy.exists()) {
+                logger.lifecycle("Removing invalid resource duplicate: ${invalidConfigCopy}")
+                invalidConfigCopy.delete()
+            }
+        }
+    }
+}
+
 try {
     def servicesJSON = file('google-services.json')
     if (servicesJSON.text) {
