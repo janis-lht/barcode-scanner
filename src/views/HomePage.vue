@@ -45,33 +45,37 @@
           </div>
 
           <ion-list v-else lines="full" class="barcode-list">
-            <ion-item v-for="barcode in barcodes" :key="barcode.id" class="barcode-item">
-              <ion-label class="ion-text-wrap barcode-label">
-                <h3>{{ barcode.displayValue || 'Ohne Wert' }}</h3>
-                <p>Format: {{ barcode.format }}</p>
-                <p>Werttyp: {{ barcode.valueType }}</p>
-              </ion-label>
+            <ion-item-sliding v-for="barcode in barcodes" :key="barcode.id" class="barcode-item">
+              <ion-item class="barcode-item-content">
+                <ion-label class="ion-text-wrap barcode-label">
+                  <h3>{{ barcode.displayValue || 'Ohne Wert' }}</h3>
+                  <p>Format: {{ barcode.format }}</p>
+                  <p>Werttyp: {{ barcode.valueType }}</p>
+                </ion-label>
+              </ion-item>
 
-              <div class="barcode-actions">
-                <ion-button size="small" fill="clear" @click="shareBarcode(barcode)">
-                  Teilen
-                </ion-button>
-                <ion-button size="small" fill="clear" @click="copyBarcode(barcode)">
-                  Kopieren
-                </ion-button>
-                <ion-button
-                  v-if="isOpenable(barcode)"
-                  size="small"
-                  fill="clear"
-                  @click="openBarcode(barcode)"
-                >
-                  Öffnen
-                </ion-button>
-                <ion-button size="small" fill="clear" color="danger" @click="deleteBarcode(barcode)">
-                  Löschen
-                </ion-button>
-              </div>
-            </ion-item>
+              <ion-item-options side="start">
+                <ion-item-option class="action-option action-option-share" @click="shareBarcode(barcode)">
+                  <ion-icon :icon="shareOutline" class="action-icon" />
+                  <span>Teilen</span>
+                </ion-item-option>
+                <ion-item-option v-if="isOpenable(barcode)" class="action-option action-option-open" @click="openBarcode(barcode)">
+                  <ion-icon :icon="openOutline" class="action-icon" />
+                  <span>Öffnen</span>
+                </ion-item-option>
+              </ion-item-options>
+
+              <ion-item-options side="end">
+                <ion-item-option class="action-option action-option-copy" @click="copyBarcode(barcode)">
+                  <ion-icon :icon="copyOutline" class="action-icon" />
+                  <span>Kopieren</span>
+                </ion-item-option>
+                <ion-item-option color="danger" class="action-option action-option-delete" @click="deleteBarcode(barcode)">
+                  <ion-icon :icon="trashOutline" class="action-icon" />
+                  <span>Löschen</span>
+                </ion-item-option>
+              </ion-item-options>
+            </ion-item-sliding>
           </ion-list>
         </ion-card-content>
       </ion-card>
@@ -98,13 +102,18 @@ import {
   IonContent,
   IonHeader,
   IonItem,
+  IonItemOption,
+  IonItemOptions,
+  IonItemSliding,
   IonLabel,
   IonList,
   IonPage,
+  IonIcon,
   IonTitle,
   IonToolbar,
   IonToast,
 } from '@ionic/vue';
+import { copyOutline, openOutline, shareOutline, trashOutline } from 'ionicons/icons';
 import { Clipboard } from '@capacitor/clipboard';
 import { AppLauncher } from '@capacitor/app-launcher';
 import { DefaultWebViewOptions, InAppBrowser } from '@capacitor/inappbrowser';
@@ -284,14 +293,7 @@ async function openBarcode(barcode: BarcodeEntry) {
 }
 
 .barcode-item {
-  --padding-start: 0;
-  --inner-padding-end: 0;
-  --min-height: unset;
-}
-
-.barcode-item::part(native) {
-  align-items: stretch;
-  flex-direction: column;
+  margin-bottom: 10px;
 }
 
 .barcode-label h3 {
@@ -309,11 +311,32 @@ async function openBarcode(barcode: BarcodeEntry) {
   color: var(--ion-color-medium-shade);
 }
 
-.barcode-actions {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(96px, 1fr));
-  gap: 8px;
-  width: 100%;
-  margin-top: 12px;
+.action-option {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: center;
+  justify-content: center;
+  min-width: 84px;
+}
+
+.action-icon {
+  font-size: 1.15rem;
+}
+
+.action-option-share {
+  --background: var(--ion-color-primary);
+}
+
+.action-option-open {
+  --background: var(--ion-color-tertiary);
+}
+
+.action-option-copy {
+  --background: var(--ion-color-secondary);
+}
+
+.action-option-delete {
+  --background: var(--ion-color-danger);
 }
 </style>
