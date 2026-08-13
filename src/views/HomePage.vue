@@ -55,24 +55,20 @@
               </ion-item>
 
               <ion-item-options side="start">
-                <ion-item-option class="action-option action-option-share" @click="shareBarcode(barcode)">
-                  <ion-icon :icon="shareOutline" class="action-icon" />
-                  <span>Teilen</span>
-                </ion-item-option>
-                <ion-item-option v-if="isOpenable(barcode)" class="action-option action-option-open" @click="openBarcode(barcode)">
+                <ion-item-option v-if="isOpenable(barcode)" class="action-option action-option-open" aria-label="Öffnen" @click="openBarcode(barcode)">
                   <ion-icon :icon="openOutline" class="action-icon" />
-                  <span>Öffnen</span>
+                </ion-item-option>
+                <ion-item-option class="action-option action-option-share" aria-label="Teilen" @click="shareBarcode(barcode)">
+                  <ion-icon :icon="shareOutline" class="action-icon" />
                 </ion-item-option>
               </ion-item-options>
 
               <ion-item-options side="end">
-                <ion-item-option class="action-option action-option-copy" @click="copyBarcode(barcode)">
+                <ion-item-option class="action-option action-option-copy" aria-label="Kopieren" @click="copyBarcode(barcode)">
                   <ion-icon :icon="copyOutline" class="action-icon" />
-                  <span>Kopieren</span>
                 </ion-item-option>
-                <ion-item-option color="danger" class="action-option action-option-delete" @click="deleteBarcode(barcode)">
+                <ion-item-option color="danger" class="action-option action-option-delete" aria-label="Löschen" @click="deleteBarcode(barcode)">
                   <ion-icon :icon="trashOutline" class="action-icon" />
-                  <span>Löschen</span>
                 </ion-item-option>
               </ion-item-options>
             </ion-item-sliding>
@@ -294,6 +290,14 @@ async function openBarcode(barcode: BarcodeEntry) {
 
 .barcode-item {
   margin-bottom: 10px;
+}
+
+/* Damit ion-item-options beim Swipen nicht vom übergeordneten Card-Container abgeschnitten werden */
+.list-card,
+.list-card ion-card-content,
+.barcode-list,
+.barcode-item {
+  overflow: visible;
 }
 
 .barcode-label h3 {

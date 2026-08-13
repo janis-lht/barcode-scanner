@@ -1,5 +1,8 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
+// Redirect build output to the system temp directory to avoid OneDrive permission locks
+rootProject.buildDir = new File(System.getProperty('java.io.tmpdir'), "${rootProject.name}-gradle-build")
+
 buildscript {
     
     repositories {
