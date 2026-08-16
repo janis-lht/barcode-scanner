@@ -1,3 +1,18 @@
+:root {
+  --ion-background-color: #CCE3E0;
+}
+
+html,
+body,
+#app,
+ion-app,
+ion-page,
+ion-content {
+  background: #CCE3E0 !important;
+  --background: #CCE3E0 !important;
+  --ion-background-color: #CCE3E0 !important;
+}
+
 .barcode-scanner-active {
   visibility: hidden;
   background: transparent !important;

@@ -20,9 +20,9 @@
       <ion-card class="scan-card">
         <ion-card-content>
           <div class="scan-actions">
-            <ion-button expand="block" @click="scanWithCameraAction">Scan mit Kamera</ion-button>
-            <ion-button expand="block" fill="outline" @click="scanFromGalleryAction">
-              Scan aus Galerie
+            <ion-button expand="block" color="tertiary" @click="scanWithCameraAction">Barcode scannen</ion-button>
+            <ion-button expand="block" color="tertiary" fill="outline" @click="scanFromGalleryAction">
+              Bild aus Galerie auswählen
             </ion-button>
           </div>
           <p class="scan-count">
@@ -34,9 +34,6 @@
       <ion-card class="list-card">
         <ion-card-header>
           <ion-card-title>Gespeicherte Barcodes</ion-card-title>
-          <ion-card-subtitle>
-            Wert, Format, Werttyp und alle verfügbaren Aktionen pro Eintrag
-          </ion-card-subtitle>
         </ion-card-header>
 
         <ion-card-content>
@@ -93,7 +90,6 @@ import {
   IonCard,
   IonCardContent,
   IonCardHeader,
-  IonCardSubtitle,
   IonCardTitle,
   IonContent,
   IonHeader,
@@ -255,10 +251,6 @@ async function openBarcode(barcode: BarcodeEntry) {
 </script>
 
 <style scoped>
-.barcode-page {
-  --background: linear-gradient(180deg, #f6f8fc 0%, #eef2f8 100%);
-}
-
 .hero {
   margin-bottom: 16px;
 }
@@ -267,6 +259,7 @@ async function openBarcode(barcode: BarcodeEntry) {
 .list-card {
   border-radius: 20px;
   box-shadow: 0 12px 30px rgba(19, 33, 68, 0.08);
+  background-color: #F3F2F1;
 }
 
 .scan-actions {
