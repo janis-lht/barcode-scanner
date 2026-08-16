@@ -1,6 +1,5 @@
 import { BarcodeScanner } from '@capacitor-mlkit/barcode-scanning';
 import { FilePicker } from '@capawesome/capacitor-file-picker';
-import { Haptics, ImpactStyle } from '@capacitor/haptics';
 import { barcodeFormatToLabel, barcodeValueTypeName } from '../utils/barcodeHelpers';
 import type { BarcodeEntry } from './barcodeStore';
 
@@ -47,7 +46,6 @@ export async function scanWithCamera(): Promise<Array<Omit<BarcodeEntry, 'id' | 
     return [];
   }
 
-  Haptics.impact({ style: ImpactStyle.Medium });
   return result.barcodes.map(normalizeBarcode);
 }
 
@@ -67,8 +65,6 @@ export async function scanFromGallery(): Promise<Array<Omit<BarcodeEntry, 'id' |
   if (!readResult || !readResult.barcodes || readResult.barcodes.length === 0) {
     return [];
   }
-
-  Haptics.impact({ style: ImpactStyle.Medium });
 
   return readResult.barcodes.map(normalizeBarcode);
 }

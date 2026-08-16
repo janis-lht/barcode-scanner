@@ -18,7 +18,6 @@
     "@capacitor/app-launcher": "^8.0.1",
     "@capacitor/clipboard": "^8.0.1",
     "@capacitor/core": "8.4.2",
-    "@capacitor/haptics": "^8.0.2",
     "@capacitor/inappbrowser": "^4.0.1",
     "@capacitor/keyboard": "8.0.5",
     "@capacitor/preferences": "^8.0.1",
