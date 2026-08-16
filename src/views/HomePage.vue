@@ -279,28 +279,31 @@ async function openBarcode(barcode: BarcodeEntry) {
 
 .barcode-list {
   background: transparent;
+  --background: transparent;
 }
 
 .barcode-item {
   margin-bottom: 10px;
+  --background: #ffffff;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(19, 33, 68, 0.08);
 }
 
-/* Damit ion-item-options beim Swipen nicht vom übergeordneten Card-Container abgeschnitten werden */
-.list-card,
-.list-card ion-card-content,
-.barcode-list,
-.barcode-item {
-  overflow: visible;
+.barcode-item-content {
+  --background: #ffffff;
+  --border-radius: 14px;
+  --inner-border-width: 0;
+  --padding-start: 16px;
+  --padding-end: 16px;
+  --min-height: 72px;
 }
 
 .barcode-label h3 {
   margin: 0 0 6px;
   font-size: 1.05rem;
   font-weight: 700;
-}
-
-.barcode-label {
-  width: 100%;
+  color: #1f2a37;
 }
 
 .barcode-label p {
