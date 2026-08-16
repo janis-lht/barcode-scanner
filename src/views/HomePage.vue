@@ -20,9 +20,9 @@
       <ion-card class="scan-card">
         <ion-card-content>
           <div class="scan-actions">
-            <ion-button expand="block" @click="scanWithCameraAction">Scan mit Kamera</ion-button>
-            <ion-button expand="block" fill="outline" @click="scanFromGalleryAction">
-              Scan aus Galerie
+            <ion-button expand="block" color="tertiary" @click="scanWithCameraAction">Barcode scannen</ion-button>
+            <ion-button expand="block" color="tertiary" fill="outline" @click="scanFromGalleryAction">
+              Bild aus Galerie auswählen
             </ion-button>
           </div>
           <p class="scan-count">
@@ -34,9 +34,6 @@
       <ion-card class="list-card">
         <ion-card-header>
           <ion-card-title>Gespeicherte Barcodes</ion-card-title>
-          <ion-card-subtitle>
-            Wert, Format, Werttyp und alle verfügbaren Aktionen pro Eintrag
-          </ion-card-subtitle>
         </ion-card-header>
 
         <ion-card-content>
@@ -93,7 +90,6 @@ import {
   IonCard,
   IonCardContent,
   IonCardHeader,
-  IonCardSubtitle,
   IonCardTitle,
   IonContent,
   IonHeader,
@@ -255,10 +251,6 @@ async function openBarcode(barcode: BarcodeEntry) {
 </script>
 
 <style scoped>
-.barcode-page {
-  --background: linear-gradient(180deg, #f6f8fc 0%, #eef2f8 100%);
-}
-
 .hero {
   margin-bottom: 16px;
 }
@@ -267,6 +259,7 @@ async function openBarcode(barcode: BarcodeEntry) {
 .list-card {
   border-radius: 20px;
   box-shadow: 0 12px 30px rgba(19, 33, 68, 0.08);
+  background-color: #F3F2F1;
 }
 
 .scan-actions {
@@ -286,28 +279,31 @@ async function openBarcode(barcode: BarcodeEntry) {
 
 .barcode-list {
   background: transparent;
+  --background: transparent;
 }
 
 .barcode-item {
   margin-bottom: 10px;
+  --background: #ffffff;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(19, 33, 68, 0.08);
 }
 
-/* Damit ion-item-options beim Swipen nicht vom übergeordneten Card-Container abgeschnitten werden */
-.list-card,
-.list-card ion-card-content,
-.barcode-list,
-.barcode-item {
-  overflow: visible;
+.barcode-item-content {
+  --background: #ffffff;
+  --border-radius: 14px;
+  --inner-border-width: 0;
+  --padding-start: 16px;
+  --padding-end: 16px;
+  --min-height: 72px;
 }
 
 .barcode-label h3 {
   margin: 0 0 6px;
   font-size: 1.05rem;
   font-weight: 700;
-}
-
-.barcode-label {
-  width: 100%;
+  color: #1f2a37;
 }
 
 .barcode-label p {
