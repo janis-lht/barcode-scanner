@@ -8,20 +8,8 @@ In diesem Projekt wurde KI als unterstützendes Werkzeug für Entwicklung, Troub
 
 ## Einsatzbereiche
 
-### 1. Styling und UI-Verbesserung
-- Hilfe bei der Gestaltung der Ionic-Seite und der Button-Optik
-- Anpassung der Listendarstellung für bessere Lesbarkeit und visuelle Trennung
-- Vorschläge für konsistente Farbanpassungen
-
-### 2. Debugging und Fehleranalyse
-- Analyse von Ionic-/Capacitor-Fehlern
-- Beheben von Styling-Problemen und Verhaltensweisen
-- Untersuchung von Build- und Android-Setup-Problemen
-
-### 3. Code-Refinement und Bereinigung
-- Reduktion von überflüssigem Code und Styling, das nicht zwingend für die Benutzeroberfläche nötig war
-
-### 4. Qualitätskontrolle
-- Prüfung der Projektstruktur für eine saubere Abgabe
-- Sicherstellen, der Build- und App-Workflow Funktionalität
-- Beratung zur finalen Abgabe und zur Trennung von Sourcecode, APK und Präsentation
+1. Styling und UI-Verbesserung
+2. Debugging und Fehleranalyse
+3. Code-Refinement und Bereinigung
+4. Autocompletion und Codevorschläge
+5. Qualitätskontrolle
